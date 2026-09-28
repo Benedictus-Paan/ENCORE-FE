@@ -26,10 +26,35 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
+  // Admin & superadmin
   {
     icon: <GridIcon />,
     name: "Dashboard",
     subItems: [{ name: "Ecommerce", path: "/", pro: false }],
+  },
+  {
+    icon: <GridIcon />,
+    name: "Manage Users",
+    subItems: [
+      { name: "All User", path: "/basic-tables", pro: false }, // superadmin only
+      { name: "Admins", path: "/basic-tables", pro: false }, 
+      { name: "Customer", path: "/basic-tables", pro: false }, 
+      { name: "Managers", path: "/basic-tables", pro: false }], 
+  },
+  {
+    icon: <GridIcon />,
+    name: "Create Users",
+    subItems: [
+      { name: "Admins", path: "/basic-tables", pro: false }, // superadmin only
+      { name: "Artist", path: "/basic-tables", pro: false },  // 
+      { name: "Managers", path: "/basic-tables", pro: false }], 
+  },
+  {
+    icon: <GridIcon />,
+    name: "Concerts",
+    subItems: [
+      { name: "Concerts", path: "/", pro: false },
+      { name: "Tickets", path: "/", pro: false }],
   },
   {
     icon: <CalenderIcon />,
@@ -101,14 +126,14 @@ const AppSidebar: React.FC = () => {
     index: number;
   } | null>(null);
   const [subMenuHeight, setSubMenuHeight] = useState<Record<string, number>>(
-    {}
+    {},
   );
   const subMenuRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   // const isActive = (path: string) => location.pathname === path;
   const isActive = useCallback(
     (path: string) => location.pathname === path,
-    [location.pathname]
+    [location.pathname],
   );
 
   useEffect(() => {
@@ -194,7 +219,7 @@ const AppSidebar: React.FC = () => {
                   className={`ml-auto w-5 h-5 transition-transform duration-200 ${
                     openSubmenu?.type === menuType &&
                     openSubmenu?.index === index
-                      ? "rotate-180 text-brand-500"
+                      ? "rotate-180 text-yellow-500"
                       : ""
                   }`}
                 />
@@ -285,13 +310,13 @@ const AppSidebar: React.FC = () => {
 
   return (
     <aside
-      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
+      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-dark dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
         ${
           isExpanded || isMobileOpen
             ? "w-[290px]"
             : isHovered
-            ? "w-[290px]"
-            : "w-[90px]"
+              ? "w-[290px]"
+              : "w-[90px]"
         }
         ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
         lg:translate-x-0`}
