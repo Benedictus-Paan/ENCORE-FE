@@ -20,8 +20,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     localStorage.setItem("theme", "dark");
   }, []);
 
-  // toggle is removed karena buat apa dawg
-
   return (
     <ThemeContext.Provider value={{ theme: "dark" }}>
       {children}
